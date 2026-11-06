@@ -1,0 +1,102 @@
+
+{% extends "base.html" %}
+
+{% block title %}افزودن وظیفه | TaskFlow{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <span class="page-subtitle">مدیریت فعالیت‌ها</span>
+        <h1>افزودن وظیفه جدید</h1>
+        <p class="page-description">اطلاعات وظیفه جدید خود را وارد کنید.</p>
+    </div>
+
+    <a href="{{ url_for('tasks') }}" class="btn btn-outline-primary">
+        <i class="bi bi-arrow-right ms-1"></i>
+        بازگشت به فهرست
+    </a>
+</div>
+
+<div class="form-card">
+
+    <div class="form-card-header">
+        <div class="form-heading-icon">
+            <i class="bi bi-plus-lg"></i>
+        </div>
+
+        <div>
+            <h5>اطلاعات وظیفه</h5>
+            <p>فیلدهای موردنیاز را تکمیل کنید.</p>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('add_task') }}">
+
+        <div class="mb-4">
+            <label for="title" class="form-label">عنوان وظیفه <span class="required">*</span></label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                class="form-control"
+                placeholder="مثلاً مطالعه درس شبکه"
+                maxlength="200"
+                required
+            >
+        </div>
+
+        <div class="mb-4">
+            <label for="description" class="form-label">توضیحات</label>
+            <textarea
+                id="description"
+                name="description"
+                class="form-control"
+                rows="4"
+                placeholder="توضیحات تکمیلی درباره وظیفه..."
+            ></textarea>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <label for="priority" class="form-label">اولویت وظیفه</label>
+                <select id="priority" name="priority" class="form-select">
+                    <option value="low">کم</option>
+                    <option value="medium" selected>متوسط</option>
+                    <option value="high">زیاد</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="due_date" class="form-label">تاریخ سررسید (شمسی)</label>
+                <input
+                    type="text"
+                    id="due_date"
+                    name="due_date"
+                    class="form-control"
+                    placeholder="مثلاً ۱۴۰۵/۰۸/۱۵"
+                    inputmode="numeric"
+                    autocomplete="off"
+                >
+                <small class="text-muted">تاریخ را به شکل سال/ماه/روز وارد کنید.</small>
+            </div>
+
+        </div>
+
+        <div class="form-footer">
+            <a href="{{ url_for('tasks') }}" class="btn btn-light">
+                انصراف
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg ms-1"></i>
+                ثبت وظیفه
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

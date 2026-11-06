@@ -1,0 +1,111 @@
+
+{% extends "base.html" %}
+
+{% block title %}ویرایش وظیفه | TaskFlow{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <span class="page-subtitle">مدیریت فعالیت‌ها</span>
+        <h1>ویرایش وظیفه</h1>
+        <p class="page-description">اطلاعات و وضعیت وظیفه را به‌روزرسانی کنید.</p>
+    </div>
+
+    <a href="{{ url_for('tasks') }}" class="btn btn-outline-primary">
+        <i class="bi bi-arrow-right ms-1"></i>
+        بازگشت به فهرست
+    </a>
+</div>
+
+<div class="form-card">
+
+    <div class="form-card-header">
+        <div class="form-heading-icon">
+            <i class="bi bi-pencil-square"></i>
+        </div>
+
+        <div>
+            <h5>اطلاعات وظیفه</h5>
+            <p>تغییرات موردنظر خود را اعمال کنید.</p>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('edit_task', task_id=task.id) }}">
+
+        <div class="mb-4">
+            <label for="title" class="form-label">عنوان وظیفه <span class="required">*</span></label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                class="form-control"
+                value="{{ task.title }}"
+                maxlength="200"
+                required
+            >
+        </div>
+
+        <div class="mb-4">
+            <label for="description" class="form-label">توضیحات</label>
+            <textarea
+                id="description"
+                name="description"
+                class="form-control"
+                rows="4"
+            >{{ task.description or '' }}</textarea>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <label for="priority" class="form-label">اولویت وظیفه</label>
+                <select id="priority" name="priority" class="form-select">
+                    <option value="low" {% if task.priority == 'low' %}selected{% endif %}>کم</option>
+                    <option value="medium" {% if task.priority == 'medium' %}selected{% endif %}>متوسط</option>
+                    <option value="high" {% if task.priority == 'high' %}selected{% endif %}>زیاد</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="status" class="form-label">وضعیت وظیفه</label>
+                <select id="status" name="status" class="form-select">
+                    <option value="pending" {% if task.status == 'pending' %}selected{% endif %}>در انتظار انجام</option>
+                    <option value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>در حال انجام</option>
+                    <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>تکمیل‌شده</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="due_date" class="form-label">تاریخ سررسید (شمسی)</label>
+                <input
+                    type="text"
+                    id="due_date"
+                    name="due_date"
+                    class="form-control"
+                    value="{{ task.due_date_shamsi or '' }}"
+                    placeholder="مثلاً ۱۴۰۵/۰۸/۱۵"
+                    inputmode="numeric"
+                    autocomplete="off"
+                >
+                <small class="text-muted">تاریخ را به شکل سال/ماه/روز وارد کنید.</small>
+            </div>
+
+        </div>
+
+        <div class="form-footer">
+            <a href="{{ url_for('tasks') }}" class="btn btn-light">
+                انصراف
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg ms-1"></i>
+                ذخیره تغییرات
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

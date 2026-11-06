@@ -1,0 +1,101 @@
+
+{% extends "base.html" %}
+
+{% block title %}داشبورد | TaskFlow{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-header">
+    <div>
+        <span class="page-subtitle">نمای کلی فعالیت‌ها</span>
+        <h1>داشبورد</h1>
+        <p>وضعیت وظایف روزانه خود را در یک نگاه مشاهده کنید.</p>
+    </div>
+
+    <a href="{{ url_for('add_task') }}" class="btn btn-primary">
+        <i class="bi bi-plus-lg ms-1"></i>
+        وظیفه جدید
+    </a>
+</div>
+
+<div class="row g-4 mt-2">
+
+    <div class="col-md-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <div class="stat-icon purple">
+                    <i class="bi bi-layers"></i>
+                </div>
+                <span class="stat-label">مجموع وظایف</span>
+            </div>
+            <h2>{{ total_tasks }}</h2>
+            <p>تمام وظایف ثبت‌شده</p>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <div class="stat-icon orange">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+                <span class="stat-label">در انتظار انجام</span>
+            </div>
+            <h2>{{ pending_tasks }}</h2>
+            <p>وظایف شروع‌نشده</p>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <div class="stat-icon blue">
+                    <i class="bi bi-arrow-repeat"></i>
+                </div>
+                <span class="stat-label">در حال انجام</span>
+            </div>
+            <h2>{{ in_progress_tasks }}</h2>
+            <p>وظایف در دست اجرا</p>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <div class="stat-icon green">
+                    <i class="bi bi-check2-circle"></i>
+                </div>
+                <span class="stat-label">تکمیل‌شده</span>
+            </div>
+            <h2>{{ completed_tasks }}</h2>
+            <p>وظایف به پایان رسیده</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="dashboard-bottom mt-4">
+
+    <div class="welcome-card">
+        <div class="welcome-content">
+            <span>برنامه‌ریزی بهتر، عملکرد بهتر</span>
+            <h3>هر روز یک قدم به جلو!</h3>
+            <p>
+                وظایف خود را ثبت کنید، اولویت‌بندی کنید
+                و پیشرفت کارهایتان را دنبال کنید.
+            </p>
+
+            <a href="{{ url_for('tasks') }}" class="btn btn-light">
+                مشاهده فهرست وظایف
+                <i class="bi bi-arrow-left me-1"></i>
+            </a>
+        </div>
+
+        <div class="welcome-icon">
+            <i class="bi bi-calendar2-check"></i>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
